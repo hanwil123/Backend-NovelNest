@@ -7,6 +7,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import axios from 'axios'; // import axios untuk menangani request
+import Cookies from 'js-cookie'
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -37,7 +38,7 @@ export default function Login({ status, canResetPassword }) {
                 const response = await axios.get(`/auth/google/callback?code=${code}`);
                 if (response.data.token) {
                     // Simpan token ke localStorage
-                    localStorage.setItem('token', response.data.token);
+                    Cookies.set("token", response.data.token);
                     // Atur token di header default axios
                     axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
                     // Redirect ke dashboard atau halaman lain

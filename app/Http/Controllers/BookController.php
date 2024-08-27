@@ -30,12 +30,6 @@ class BookController extends Controller
         return response()->json($categories);
     }
 
-    public function getPageCount($bookId)
-    {
-        $book = Book::findOrFail($bookId);
-        return $book->halaman; // Mengembalikan jumlah halaman
-    }
-
 
     public function store(Request $request)
     {

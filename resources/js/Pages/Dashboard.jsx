@@ -4,6 +4,7 @@ import { SidebarDashboard } from "@/Components/SidebarDashboard";
 import { Table } from "flowbite-react";
 import axios from "axios";
 import DeleteAlert from "./DeleteAlert";
+import Cookies from 'js-cookie'
 
 export default function Dashboard({ auth }) {
     const [bookDatas, setBookDatas] = useState([]);
@@ -15,7 +16,7 @@ export default function Dashboard({ auth }) {
         const token = params.get('token');
 
         if (token) {
-            localStorage.setItem('token', token);
+            Cookies.set("token", token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             // Hapus token dari URL
             window.history.replaceState({}, document.title, "/dashboard");

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Bookmark;
 use App\Models\Book;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class BookmarkControllers extends Controller
 {
@@ -66,7 +67,7 @@ class BookmarkControllers extends Controller
     {
         $bookmark = Bookmark::findOrFail($id);
 
-        if ($bookmark->user_id != Auth::id()) {
+        if ($bookmark->user_id != auth()->user()->id) {
             return response()->json(['message' => 'Unauthorized'], 403);
         }
 
@@ -74,6 +75,7 @@ class BookmarkControllers extends Controller
 
         return response()->json(['message' => 'Bookmark deleted successfully.']);
     }
+
 
     /**
      * Get bookmarks for a specific book.
