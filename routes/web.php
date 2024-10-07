@@ -16,7 +16,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware('auth:web,google')->name('dashboard');
+})->name('dashboard');
 
 Route::get('/dashboard/upload-books', function () {
     return Inertia::render('UploadBooks');

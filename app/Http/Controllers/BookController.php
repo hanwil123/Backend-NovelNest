@@ -17,6 +17,11 @@ class BookController extends Controller
         $books = Book::with('category')->paginate(10);
         return response($books);
     }
+    public function getAllCategories()
+    {
+        $categories = Category::all();
+        return response($categories);
+    }
 
     public function create()
     {
@@ -74,9 +79,6 @@ class BookController extends Controller
             return response()->json(['error' => 'Failed to upload book'], 500);
         }
     }
-
-
-
 
     public function show($id)
     {

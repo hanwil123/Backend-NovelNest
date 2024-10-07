@@ -4,6 +4,7 @@ use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/api/books', [BookController::class, 'index'])->name('books.index');
+Route::get('/api/books/categories', [BookController::class, 'getAllCategories'])->name('books.getAllCategories');
 Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
 Route::post('/api/books', [BookController::class, 'store'])->name('books.store');
 Route::get('/api/books/{book}', [BookController::class, 'show'])->name('books.show');
