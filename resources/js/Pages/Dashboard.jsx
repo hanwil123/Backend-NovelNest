@@ -4,7 +4,7 @@ import { SidebarDashboard } from "@/Components/SidebarDashboard";
 import { Table } from "flowbite-react";
 import axios from "axios";
 import DeleteAlert from "./DeleteAlert";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 export default function Dashboard({ auth }) {
     const [bookDatas, setBookDatas] = useState([]);
@@ -13,11 +13,11 @@ export default function Dashboard({ auth }) {
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-        const token = params.get('token');
+        const token = params.get("token");
 
         if (token) {
             Cookies.set("token", token);
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             // Hapus token dari URL
             window.history.replaceState({}, document.title, "/dashboard");
         }
@@ -26,10 +26,10 @@ export default function Dashboard({ auth }) {
     }, []);
     const fetchBooks = async () => {
         try {
-            const response = await axios.get('/api/books');
+            const response = await axios.get("/api/books");
             setBookDatas(response.data.data);
         } catch (error) {
-            console.error('Error fetching books:', error);
+            console.error("Error fetching books:", error);
         }
     };
 
@@ -59,7 +59,9 @@ export default function Dashboard({ auth }) {
                 <SidebarDashboard />
                 <div className="flex-col w-full h-full">
                     <div className="flex mx-auto px-6 my-5">
-                        <h1 className=" text-black text-bold text-xl">Dashboard</h1>
+                        <h1 className=" text-black text-bold text-xl">
+                            Dashboard
+                        </h1>
                     </div>
                     <div className="">
                         <div className="">

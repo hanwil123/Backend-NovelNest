@@ -17,7 +17,11 @@ class UsersGoogle extends Authenticatable implements JWTSubject
         'password',
         'google_id',
         'google_token',
-        'google_refresh_token'
+        'google_refresh_token',
+        'number_phone',
+        'address',
+        'date_of_birth',
+        'gender'
     ];
     protected $hidden = [
         'password',

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();  // Auto-incrementing primary key
-            $table->string('name');  // User's full name
+            $table->string('namalengkap');  // User's full name
+            $table->string('notelp');
             $table->string('email')->unique();  // User's email, must be unique
             $table->string('password');  // Encrypted password
             $table->enum('role', ['admin', 'user'])->default('user');  // User's role, default is 'user'
+            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
             $table->timestamps();  // Automatically adds 'created_at' and 'updated_at' columns
         });
 

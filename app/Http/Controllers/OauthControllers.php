@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\UsersGoogle;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
@@ -41,6 +42,25 @@ class OauthControllers extends Controller
 
         // Redirect ke frontend dengan token sebagai parameter
         return redirect()->to('/dashboard?token=' . $token);
+    }
+
+    public function updateUser(Request $request) {
+        $user = auth()->user()->id;
+        if (!$user) {
+            return response()->json(['error' => 'User tidak ditemukan'], 404);
+        }
+
+        $usersGoogle = UsersGoogle::find($user);
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255|unique:users-google,email,' . $user,
+            'number_phone' => 'nullable|string|max:15',
+            'address' => 'nullable|string',
+            'date_of_birth' => 'nullable|date',
+        ]);
+
+        $usersGoogle ->fill($request);
+        return response()->json(['message' => 'User berhasil diupdate']);
     }
     public function refresh()
     {
